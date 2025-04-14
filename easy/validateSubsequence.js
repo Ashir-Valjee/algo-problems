@@ -81,3 +81,9 @@ function isValidSubsequence4(array, sequence) {
 
   return seqIdx === sequence.length;
 }
+
+// attach a pointer to seqence
+// if the element of seq is in array, pointer++
+// else carry on looping through array
+
+// if pointer reaches end of sequence it is a valid subsequence!!
