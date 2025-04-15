@@ -25,6 +25,7 @@ function tournamentWinner(competitions, results) {
   }
 
   console.log(Object.keys(resultsObj));
+  console.log(resultsObj);
 
   const winningTeam = Object.keys(resultsObj).reduce((a, b) =>
     resultsObj[a] > resultsObj[b] ? a : b
@@ -33,8 +34,44 @@ function tournamentWinner(competitions, results) {
   return winningTeam;
 }
 
+function tournamentWinner2(competitions, results) {
+  // more efficient working with only one loop through
+  const resultsObj = { "": 0 };
+  let bestTeam = "";
+
+  for (let i = 0; i < competitions.length; i++) {
+    const homeTeam = competitions[i][0];
+    const awayTeam = competitions[i][1];
+    if (results[i] === 1) {
+      if (homeTeam in resultsObj) {
+        resultsObj[homeTeam] += 3;
+      } else {
+        resultsObj[homeTeam] = 3;
+      }
+
+      if (resultsObj[bestTeam] < resultsObj[homeTeam]) {
+        bestTeam = homeTeam;
+      }
+    } else {
+      if (awayTeam in resultsObj) {
+        resultsObj[awayTeam] += 3;
+      } else {
+        resultsObj[awayTeam] = 3;
+      }
+      if (resultsObj[bestTeam] < resultsObj[awayTeam]) {
+        bestTeam = awayTeam;
+      }
+    }
+  }
+
+  //   console.log(bestTeam);
+  console.log(resultsObj);
+
+  return bestTeam;
+}
+
 console.log(
-  tournamentWinner(
+  tournamentWinner2(
     [
       ["HTML", "C#"],
       ["C#", "Python"],
